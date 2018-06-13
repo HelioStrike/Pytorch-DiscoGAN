@@ -84,14 +84,14 @@ def main():
 
 
     #save results for every few epochs
-    def sample_images(batches_done):
+    def sample_images(epoch_num):
         imgs = next(iter(valloader))
         real_A = imgs['A'].cuda()
         fake_B = G_AB(real_A)
         real_B = imgs['B'].cuda()
         fake_A = G_BA(real_B)
         fin = torch.cat((real_A.data, fake_B.data, real_B.data, fake_A.data), 0)
-        save_image(fin, 'images/edges2shoes_small/%s.png' % (batches_done), nrow=8, normalize=True)
+        save_image(fin, 'images/edges2shoes_small/%s.png' % (epoch_num), nrow=8, normalize=True)
         print("Saving images...")
 
     for epoch in range(50):
